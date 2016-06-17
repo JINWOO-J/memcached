@@ -9,7 +9,7 @@ include ENVAR
 all: build push
 
 build:
-#	docker build --no-cache --rm=true --build-arg NGINX_VERSION=nginx-$(VERSION) -t $(REPO)/$(NAME):$(VERSION) .
+	cat .Dockerfile | sed  "s/__MEMCACHED_VERSION__/$(VERSION)/g"   > Dockerfile
 	docker build --no-cache --rm=true --build-arg MEMCACHED_VERSION=$(VERSION) -t $(NAME):$(VERSION) .
 
 push:
@@ -22,7 +22,7 @@ push_hub:
 
 build_hub:
 	echo "TRIGGER_KEY" ${TRIGGERKEY}
-	cat .Dockerfile | sed  "s/__REDIS_VERSION__/$(VERSION)/g"   > Dockerfile
+	cat .Dockerfile | sed  "s/__MEMCACHED_VERSION__/$(VERSION)/g"   > Dockerfile
 	git add .
 	git commit -m "$(NAME):$(VERSION) by Makefile"
 	git push

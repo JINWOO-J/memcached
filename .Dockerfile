@@ -9,8 +9,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 		libevent-2.0-5 \
 	&& rm -rf /var/lib/apt/lists/*
 
-ARG MEMCACHED_VERSION
-ENV MEMCACHED_VERSION $MEMCACHED_VERSION
+#ARG MEMCACHED_VERSION
+ENV MEMCACHED_VERSION __MEMCACHED_VERSION__
 RUN echo $MEMCACHED_VERSION
     
 ENV MEMCACHED_SHA1 7fd0ba9283c61204f196638ecf2e9295688b2314
